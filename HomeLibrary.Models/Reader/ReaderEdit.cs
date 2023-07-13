@@ -2,8 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HomeLibrary.Models.Reader;
 
-public class ReaderRegister
+public class ReaderEdit
 {
+    public int Id { get; set; }
     //including model validation via Attributes because we are retrieving information from the user
     [Required]
     [EmailAddress]

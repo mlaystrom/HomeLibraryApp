@@ -10,6 +10,7 @@ public class HomeLibraryDbContext : IdentityDbContext<ReaderEntity, IdentityRole
     public HomeLibraryDbContext(DbContextOptions<HomeLibraryDbContext> options)
         : base(options) { }
     public DbSet<ReaderEntity> Reader {get; set; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
             base.OnModelCreating(modelBuilder);
