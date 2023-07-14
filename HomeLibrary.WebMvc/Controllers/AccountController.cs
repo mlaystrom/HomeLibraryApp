@@ -46,7 +46,14 @@ public class AccountController : Controller
 
     }
 
-    // GET login
+    // GET login 
+
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(ReaderLogin model)
     {

@@ -36,6 +36,10 @@ public class ReaderService : IReaderService
             UserName = model.UserName,
             Email = model.Email
         };
+
+        //var passwordHasher = new PasswordHasher<ReaderEntity>();
+       // entity.Password = passwordHasher.HashPassword(entity, model.Password);
+
         var createResult = await _userManager.CreateAsync(reader, model.Password);
         return createResult.Succeeded;
 
@@ -66,10 +70,10 @@ public class ReaderService : IReaderService
         var normalizedEmail = _userManager.NormalizeEmail(email);
         var normalizedUserName = _userManager.NormalizeName(username);
 
-        return true;
-        //return await _context.Reader.AnyAsync(u =>
-        //u.NormalizedEmail == normalizedEmail || u.NormalizedUserName == normalizedUserName
-      //  );
+        
+        return await _context.Reader.AnyAsync(u =>
+        u.NormalizedEmail == normalizedEmail || u.NormalizedUserName == normalizedUserName
+      );
     }
 
     public async Task<ReaderDetail?>GetReaderByIdAsync(int readerId)
