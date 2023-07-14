@@ -9,13 +9,24 @@ public class HomeLibraryDbContext : IdentityDbContext<ReaderEntity, IdentityRole
 {
     public HomeLibraryDbContext(DbContextOptions<HomeLibraryDbContext> options)
         : base(options) { }
-    public DbSet<ReaderEntity> Reader {get; set; }
-    
+    //public DbSet<ReaderEntity> Reader {get; set; }
+    public virtual DbSet<BooksEntity> Book { get; set; }
+
+    public virtual DbSet<GenreEntity> Genre { get; set; }
+
+    public virtual DbSet<ReaderEntity> Reader { get; set; }
+
+    public virtual DbSet<WishListEntity> WishList { get; set; }
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ReaderEntity>().ToTable("Reader");
+            modelBuilder.Entity<GenreEntity>().ToTable("Genre");
+            modelBuilder.Entity<BooksEntity>().ToTable("Book");
+            modelBuilder.Entity<WishListEntity>().ToTable("WishList");
         
     }
 }
