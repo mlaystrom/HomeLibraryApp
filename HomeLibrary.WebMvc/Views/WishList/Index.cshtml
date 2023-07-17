@@ -5,6 +5,9 @@
 }
 
 <h1>Book Wishlist</h1>
+<div class=" col d-flex vstack gap-2 col-md-2 ">
+<a asp-action="Create" class="">Add A Book</a>
+</div>
 <table class = "table">
     <thead>
         <tr>
@@ -23,6 +26,28 @@
         </tr>
     </thead>
     <tbody>
+          @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.Author
+                    </td>
+                    <td>
+                        @item.SeriesNumber
+                    </td>
+                    <td>
+                        @item.Genre
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@item.Id">Update</a> 
+                        <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
 
     </tbody>
 </table>

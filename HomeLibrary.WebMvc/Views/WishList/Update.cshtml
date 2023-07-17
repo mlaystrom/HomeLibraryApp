@@ -1,0 +1,47 @@
+@model WishListUpdate
+@{
+    ViewData["Title"] = "Update" + Model.Title;
+}
+
+<h1>Update @Model.Title</h1>
+<hr>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form asp-action="Create" method="post">
+    <input asp-for="Id" hidden disabled>
+    <div class="col-md-6 form-floating mb-2">
+        <input asp-for="Title" class="form-control" placeholder="Title">
+        <span asp-validation-for="Title" class="text-danger"></span>
+        <label asp-for="Title" class="form-label"></label>
+      
+    </div>
+      <div class="col-md-6 form-floating mb-2">
+         <input asp-for="Author" class="form-control" placeholder="Author">
+         <span asp-validation-for="Author" class="text-danger"></span>
+        <label asp-for="Author" class="form-label"></label>
+       
+    </div>
+      <div class="col-md-6 form-floating mb-2">
+         <input asp-for="SeriesNumber" class="form-control" placeholder="SeriesNumber">
+         <span asp-validation-for="SeriesNumber" class="text-danger"></span>
+        <label asp-for="SeriesNumber" class="form-label"></label>
+       
+    </div>
+      <div class="col-md-6 form-floating mb-2">
+        <input asp-for="Genre" class="form-control" placeholder="Genre">
+        <span asp-validation-for="Genre" class="text-danger"></span>
+        <label asp-for="Genre" class="form-label"></label>
+        
+    </div>
+
+     <div class=" col d-flex vstack gap-2 col-md-2 ">
+        <input type="submit" value="Update" class="btn btn-outline-primary btn-lg">
+        <a asp-action="Index" class="">Back to WishList</a>
+     </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

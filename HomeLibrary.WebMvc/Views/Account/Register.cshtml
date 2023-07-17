@@ -3,6 +3,7 @@
     ViewData["Title"] = "Register Account";
 }
 <h1 class="display-4 mb-3">Sign up</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Register" method="post">
     <div class="form-floating mb-2">
         <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name">
@@ -18,6 +19,11 @@
         <input type="text" class="form-control" asp-for="UserName" placeholder="UserName">
         <label asp-for="UserName"></label>
         <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+     <div class="form-floating mb-2">
+        <input type="text" class="form-control" asp-for="Email" placeholder="Email">
+        <label asp-for="Email"></label>
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-floating mb-2">
         <input type="text" class="form-control" asp-for="Password" placeholder="Password">

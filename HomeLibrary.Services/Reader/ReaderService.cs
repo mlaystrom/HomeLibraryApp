@@ -27,12 +27,15 @@ public class ReaderService : IReaderService
     }
     public async Task<bool> RegisterReaderAsync(ReaderRegister model)
     {
+        Console.WriteLine(await ReaderExistsAsync(model.Email, model.UserName));
         if (await ReaderExistsAsync(model.Email, model.UserName))
             return false;
 
 
         ReaderEntity reader = new()
         {
+            FirstName = model.FirstName,
+            LastName = model.LastName,
             UserName = model.UserName,
             Email = model.Email
         };
@@ -41,6 +44,8 @@ public class ReaderService : IReaderService
        // entity.Password = passwordHasher.HashPassword(entity, model.Password);
 
         var createResult = await _userManager.CreateAsync(reader, model.Password);
+        foreach (var e in createResult.Errors)
+        Console.WriteLine(e.Description);
         return createResult.Succeeded;
 
     }

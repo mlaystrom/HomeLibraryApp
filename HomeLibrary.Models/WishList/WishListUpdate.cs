@@ -2,8 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HomeLibrary.Models.WishList;
 
-public class WishListCreate
+public class WishListUpdate
 {
+    [Required]
+    public int Id { get; set; }
 
     [Required]
     [MinLength(2, ErrorMessage = "{0} must be at least {1} characters long.")]
@@ -18,4 +20,3 @@ public class WishListCreate
 
     public string Genre { get; set; } = string.Empty;
 }
-
