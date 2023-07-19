@@ -1,9 +1,11 @@
 using HomeLibrary.Models.WishList;
 using HomeLibrary.Services.WishList;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeLibrary.WebMvc.Controllers;
 
+[Authorize]
 public class WishListController : Controller
 {
     //instance of the WishListService class needed to retrieve data from the Db
@@ -44,33 +46,51 @@ public class WishListController : Controller
 
     //WishList GET for update method
     [HttpGet]
-    public async Task<IActionResult> Update(int id)
-    {
-       WishListDetail wishlist = await _service.GetAllWishListAsync(id);
+     public async Task<IActionResult> Update(int id)
+      {
+         WishListDetail wishlist = await _service.GetWishListByIdAsync(id);
 
         WishListUpdate model = new()
-        {
-        Id = wishlist.Id,
-        Title = wishlist.Title,
-        Author = wishlist.Author,
-        SeriesNumber = wishlist.SeriesNumber,
-        Genre = wishlist.Genre,
-         };
+          {
+          Id = wishlist.Id,
+          Title = wishlist.Title,
+          Author = wishlist.Author,
+          SeriesNumber = wishlist.SeriesNumber,
+          Genre = wishlist.Genre,
+           };
 
-         return View(model);
+           return View(model);
+      }
+
+      [HttpPost]
+      public async Task<IActionResult> Update (int id, WishListUpdate model)
+      {
+          if (!ModelState.IsValid)
+          return View(model);
+
+          if(await _service.UpdateWishListAsync(model))
+              return RedirectToAction(nameof(Index), new { id = id});
+
+          ModelState.AddModelError("Save Error", "Could not update the book details.  Please try again.");
+          return View(model);
+      } 
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        WishListDetail? wishlist = await _service.GetWishListByIdAsync(id);
+        if (wishlist is null)
+            return RedirectToAction(nameof(Index));
+
+        return View(wishlist);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Update (int id, WishListUpdate model)
-    {
-        if (!ModelState.IsValid)
-        return View(model);
+    [ActionName(nameof(ConfirmDelete))]//ActionName connects the method (ConfirmDelete) to the ConfirmDelete action
 
-        if(await _service.UpdateWishListAsync(model))
-            return RedirectToAction(nameof(Index), new { id = id});
-        
-        ModelState.AddModelError("Save Error", "Could not update the book details.  Please try again.");
-        return View(model);
+    public async Task<IActionResult> ConfirmDelete(int id)
+    {
+        await _service.DeleteWishListByIdAsync(id);
+        return RedirectToAction(nameof(Index));
     }
 
 }

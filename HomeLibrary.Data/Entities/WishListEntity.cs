@@ -11,7 +11,7 @@ public class WishListEntity
     [Required]
     [ForeignKey(nameof(Reader))]
     public int ReaderId { get; set; }
-    public ReaderEntity Reader { get; set; }
+    public virtual ReaderEntity? Reader { get; set; }
 
     [Required]
     [MinLength(2), MaxLength(100)]

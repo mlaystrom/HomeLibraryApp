@@ -1,5 +1,6 @@
 using HomeLibrary.Data;
 using HomeLibrary.Data.Entities;
+using HomeLibrary.Services.Book;
 using HomeLibrary.Services.Reader;
 using HomeLibrary.Services.WishList;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<HomeLibraryDbContext>(options =>
 // builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IReaderService, ReaderService>();
 builder.Services.AddScoped<IWishListService, WishListService>();
+builder.Services.AddScoped<IBookService, BookService>();
 
 // Enables using Identity Managers 
 builder.Services.AddDefaultIdentity<ReaderEntity>()

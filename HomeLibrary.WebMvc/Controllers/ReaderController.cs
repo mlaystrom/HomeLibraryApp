@@ -65,6 +65,17 @@ public async Task<IActionResult> Edit(int id, ReaderEdit model)
     return View(model);
 }
 
+[HttpGet]//forgot to add this method endpoint for Delete
+
+public async Task<IActionResult>Delete(int id)
+{
+    ReaderDetail? reader = await _service.GetReaderByIdAsync(id);
+    if (reader is null)
+        return RedirectToAction(nameof(Index));
+
+        return View(reader);
+}
+
 [HttpPost]
 [ActionName(nameof(ConfirmDelete))]//ActionName connects the method (ConfirmDelete) to the ConfirmDelete action
 

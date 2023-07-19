@@ -1,10 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using HomeLibrary.Models.Reader;
 
 namespace HomeLibrary.Models.WishList;
 
 public class WishListCreate
 {
-
+   
+    public int ReaderId { get; set; }
     [Required]
     [MinLength(2, ErrorMessage = "{0} must be at least {1} characters long.")]
     [MaxLength(100, ErrorMessage = "{0} must be no more than {1} characters.")]

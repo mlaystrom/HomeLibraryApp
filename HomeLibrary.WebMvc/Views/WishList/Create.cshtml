@@ -1,10 +1,14 @@
-@model WishListCreate
+
+
+@model WishListCreate  
 @{
+   
     ViewData["Title"] = "Create";
 }
 <h1>Add A Book</h1>
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <form asp-action="Create" method="post">
+    
     <div class="col-md-6 form-floating mb-2">
         <input asp-for="Title" class="form-control" placeholder="Title">
         <span asp-validation-for="Title" class="text-danger"></span>

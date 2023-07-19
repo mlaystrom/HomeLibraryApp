@@ -5,6 +5,7 @@ html {
 @media (min-width: 768px) {
   html {
     font-size: 16px;
+    
   }
 }
 
@@ -19,4 +20,32 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: rgb(168, 168, 196);
+}
+h1, h2, p {
+  color: rgba(136, 46, 46, 0.856);
+}
+a {
+  color: rgb(245, 245, 252);
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+.registerLink{
+  text-decoration: none;
+  color:rgb(245, 245, 252)
+}
+.registerLink:hover{
+  text-decoration: underline;
+}
+
+.loginLink{
+  text-decoration: none;
+  color:rgb(245, 245, 252)
+}
+
+.loginLink:hover{
+  text-decoration: underline;
 }

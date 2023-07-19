@@ -110,8 +110,10 @@ public class ReaderService : IReaderService
         entity.LastName = model.LastName;
         entity.Email = model.Email;
 
-        //number of rows changed
-        return await _context.SaveChangesAsync() ==1;
+        
+        var numberOfChanges = await _context.SaveChangesAsync();
+
+        return numberOfChanges == 1;
     }
 
     public async Task<bool> DeleteReaderByIdAsync(int id)

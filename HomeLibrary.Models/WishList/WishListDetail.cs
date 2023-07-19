@@ -2,6 +2,8 @@ namespace HomeLibrary.Models.WishList;
 
 public class WishListDetail
 {
+
+
     public int Id { get; set; }
 
     public int ReaderId { get; set; }

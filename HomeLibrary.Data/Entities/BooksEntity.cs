@@ -11,7 +11,7 @@ public class BooksEntity
     [Required]
     [ForeignKey(nameof(Reader))]
     public int ReaderId { get; set; } 
-    public ReaderEntity Reader {get; set; }
+    public virtual ReaderEntity? Reader {get; set; }
 
     [Required]
     [MinLength(2), MaxLength(100)]
@@ -23,7 +23,7 @@ public class BooksEntity
     [Required]
     [ForeignKey(nameof(Genre))]
     public int GenreId {get; set; }
-    public GenreEntity Genre { get; set; }
+    public virtual GenreEntity? Genre { get; set; }
 
     public int SeriesNumber { get; set; }
 
