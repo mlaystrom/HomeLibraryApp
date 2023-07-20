@@ -1,0 +1,52 @@
+@model IEnumerable<BookListItem>
+    @{
+        ViewData["Title"] = "Book Index";
+    }
+
+    <h1>Your Book List</h1>
+    <div class=" col d-flex vstack gap-2 col-md-2 ">
+<a asp-action="Create" class="">Add A Book</a>
+</div>
+<table class = "table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeriesNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GenreId)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+          @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.Author
+                    </td>
+                    <td>
+                        @item.SeriesNumber
+                    </td>
+                    <td>
+                        @item.GenreId
+                    </td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@item.Id">Update</a> 
+                        <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+    </tbody>
+</table>

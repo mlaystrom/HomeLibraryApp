@@ -1,18 +1,17 @@
-@using Microsoft.AspNetCore.Identity
-@using HomeLibrary.Data.Entities
-@inject UserManager<ReaderEntity> UserManager  /*adding this with hopes it fixes WishListCreate Foreign Key issue */
 
-@model WishListCreate  
+
+@model BookCreate
+
 @{
-   
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create a book";
 }
+
 <h1>Add A Book</h1>
-<div asp-validation-summary="All" class="text-danger"></div>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
 <form asp-action="Create" method="post">
-  
+   
     
     <div class="col-md-6 form-floating mb-2">
         <input asp-for="Title" class="form-control" placeholder="Title">
@@ -33,9 +32,9 @@
        
     </div>
       <div class="col-md-6 form-floating mb-2">
-        <input asp-for="Genre" class="form-control" placeholder="Genre">
-        <span asp-validation-for="Genre" class="text-danger"></span>
-        <label asp-for="Genre" class="form-label"></label>
+        <input asp-for="Comment" class="form-control" placeholder="Comment">
+        <span asp-validation-for="Comment" class="text-danger"></span>
+        <label asp-for="Comment" class="form-label"></label>
         
     </div>
 
@@ -43,7 +42,7 @@
 
      <div class=" col d-flex vstack gap-2 col-md-2 ">
         <input type="submit" value="Create" class="btn btn-outline-primary btn-lg">
-        <a asp-action="Index" class="">Back to WishList</a>
+        <a asp-action="Index" class="">Back to Library</a>
      </div>
 </form>
 

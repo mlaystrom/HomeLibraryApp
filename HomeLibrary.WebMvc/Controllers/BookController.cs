@@ -1,3 +1,4 @@
+using HomeLibrary.Models.Book;
 using HomeLibrary.Services.Book;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,5 +12,29 @@ public class BookController : Controller
     public BookController (IBookService service)
     {
         _service = service;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        var book = await _service.GetAllBooksAsync();
+        return View(book);
+    }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(BookCreate model)
+    {
+        if (!ModelState.IsValid)
+            return View(model);
+
+        await _service.CreateBookAsync(model);
+
+        return RedirectToAction(nameof(Index));
     }
 }

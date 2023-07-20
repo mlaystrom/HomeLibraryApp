@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
 
 namespace HomeLibrary.Services.WishList;
 
@@ -13,15 +14,13 @@ public class WishListService : IWishListService
 {
     //field that holds HomeLibraryDbContext and injected through a constructor
     private HomeLibraryDbContext _context;
-    private int  _readerId;
-    public WishListService(IHttpContextAccessor httpContextAccessor, HomeLibraryDbContext context, IConfiguration config)
+    private int _readerId;
+    public WishListService(UserManager<ReaderEntity> userManager, HomeLibraryDbContext context, SignInManager<ReaderEntity> signInManager)
     {
-        var userClaims = httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
-        var identifierClaimType = config["ClaimTypes:Id"] ?? "Id";
-        var value = userClaims?.FindFirst(identifierClaimType)?.Value;
-        var validId = int.TryParse(value, out _readerId);
-        if (!validId)
-            throw new Exception("Attempted to add book to wishlist without Reader Id claim.");
+        var user = signInManager.Context.User; //looking at who is signed in within the current context
+
+       var claim = userManager.GetUserId(user); //looking at current user and getting the Id claim
+       int.TryParse(claim,out _readerId); //taking that claim and converting from a string to an integer and saving to the field _readerId
         _context = context;
     }
 
@@ -48,6 +47,7 @@ public class WishListService : IWishListService
     {
         List<WishListDetail> wishlist = await _context.WishList
         .Include(w => w.Reader)
+        .Where(w => w.ReaderId == _readerId) //filter all wishlist in Db to only the current user wishlist items
         .Select(w => new WishListDetail()
         {
             ReaderId = w.ReaderId,
@@ -109,7 +109,7 @@ public class WishListService : IWishListService
 
         return numberOfChanges == 1;
     }
+}
     
 
 
-}

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HomeLibrary.WebMvc.Controllers;
 
-[Authorize]
 public class WishListController : Controller
 {
     //instance of the WishListService class needed to retrieve data from the Db
