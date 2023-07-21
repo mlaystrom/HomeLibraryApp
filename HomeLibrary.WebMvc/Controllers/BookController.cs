@@ -1,6 +1,8 @@
 using HomeLibrary.Models.Book;
 using HomeLibrary.Services.Book;
+using HomeLibrary.Services.Genre;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HomeLibrary.WebMvc.Controllers;
 
@@ -9,9 +11,12 @@ public class BookController : Controller
     //used to do the indirect Db interaction
     //adding an instance of the BookService class to retrieve data from the Db
     private IBookService _service;
-    public BookController (IBookService service)
+
+    private IGenreService _genreService;
+    public BookController (IBookService service, IGenreService genreService)
     {
         _service = service;
+        _genreService = genreService;
     }
 
     [HttpGet]
@@ -22,8 +27,11 @@ public class BookController : Controller
     }
 
     [HttpGet]
-    public IActionResult Create()
+    public async Task <IActionResult> Create()
     {
+        var genres = await _genreService.GetAllGenresAsync();
+        var selectList = genres.Select(g => new SelectListItem(g.Genre, g.Id.ToString())).ToList();
+        ViewData["Genres"]= selectList;
         return View();
     }
 
@@ -106,5 +114,12 @@ public class BookController : Controller
     }
 
     //POST Delete
-    
+    [HttpPost]
+    [ActionName(nameof(Delete))] //connecting the method Confirm Delete with the Delete Action
+    public async Task<IActionResult> ConfirmDelete(int id)
+    {
+        await _service.DeleteBooksByIdAsync(id);
+        return RedirectToAction(nameof(Index));
+
+    }
 }

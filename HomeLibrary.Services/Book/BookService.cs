@@ -16,7 +16,12 @@ public class BookService : IBookService
     //the methods communicate with the Db and return formatted C# objects that the controller will use
     public BookService(UserManager<ReaderEntity> userManager, SignInManager<ReaderEntity> signInManager,HomeLibraryDbContext context)
         {
-            _context = context;
+        var user = signInManager.Context.User; //looking at who is signed in within the current context
+
+        var claim = userManager.GetUserId(user); //looking at current user and getting the Id claim
+        int.TryParse(claim, out _readerId); //taking that claim and converting from a string to an integer and saving to the field _readerId
+
+        _context = context;
         }
 
     public async Task<bool> CreateBookAsync(BookCreate model)
@@ -28,7 +33,7 @@ public class BookService : IBookService
             Author = model.Author,
             SeriesNumber = model.SeriesNumber,
             DateFinished = model.DateFinished,
-            GenreId = _genreId,
+            GenreId = model.GenreId,
             Comment = model.Comment
         };
         //adding the new entity to the WishList table
@@ -49,7 +54,8 @@ public class BookService : IBookService
             Title = b.Title,
             Author = b.Author,
             SeriesNumber = b.SeriesNumber,
-            GenreId = b.GenreId
+            GenreId = b.GenreId,
+            Genre = b.Genre.Genre //1st is genre entity and 2nd is genre name
         })
         .ToListAsync();//converting selection into a C# list
         return book;
@@ -69,7 +75,8 @@ public class BookService : IBookService
             Author = entity.Author,
             SeriesNumber = entity.SeriesNumber,
             GenreId = entity.GenreId,
-            Comment = entity.Comment,
+            Comment = entity.Comment
+           
         };
         return model;
 
@@ -95,7 +102,7 @@ public class BookService : IBookService
         return await _context.SaveChangesAsync() ==1;
     }
 
-    public async Task<bool> DeleteRestaurantByIdAsync(int id)
+    public async Task<bool> DeleteBooksByIdAsync(int id)
     {   // checking the Dbset for the book within BooksEntity that matches the given id parameter
         BooksEntity? entity = await _context.Book.FindAsync(id);
         if(entity is null)

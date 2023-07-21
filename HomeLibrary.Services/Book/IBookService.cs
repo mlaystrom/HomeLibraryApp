@@ -10,5 +10,5 @@ public interface IBookService
     Task<BookDetail>GetBooksByIdAsync(int id);
 
     Task<bool> UpdateBookAsync (BookUpdate model);
-    Task<bool>DeleteRestaurantByIdAsync(int id);
+    Task<bool>DeleteBooksByIdAsync(int id);
 }

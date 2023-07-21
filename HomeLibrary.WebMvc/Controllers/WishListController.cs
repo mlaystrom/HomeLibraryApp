@@ -74,6 +74,7 @@ public class WishListController : Controller
           return View(model);
       } 
 
+   [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
         WishListDetail? wishlist = await _service.GetWishListByIdAsync(id);

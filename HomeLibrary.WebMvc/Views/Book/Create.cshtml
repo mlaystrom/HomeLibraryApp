@@ -7,6 +7,7 @@
 
 @{
     ViewData["Title"] = "Create a book";
+    var genreList = ViewData["Genres"] as List<SelectListItem>;
 }
 
 <h1>Add A Book</h1>
@@ -27,6 +28,10 @@
          <span asp-validation-for="Author" class="text-danger"></span>
         <label asp-for="Author" class="form-label"></label>
        
+    </div>
+    <div>
+        <label asp-for="GenreId">Genre</label>
+        <select asp-for="GenreId" asp-items="genreList"></select>
     </div>
       <div class="col-md-6 form-floating mb-2">
          <input asp-for="SeriesNumber" class="form-control" placeholder="SeriesNumber">

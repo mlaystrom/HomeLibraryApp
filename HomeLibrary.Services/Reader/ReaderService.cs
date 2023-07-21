@@ -41,7 +41,7 @@ public class ReaderService : IReaderService
         };
 
         //var passwordHasher = new PasswordHasher<ReaderEntity>();
-       // entity.Password = passwordHasher.HashPassword(entity, model.Password);
+        //entity.Password = passwordHasher.HashPassword(entity, model.Password);
 
         var createResult = await _userManager.CreateAsync(reader, model.Password);
         foreach (var e in createResult.Errors)
@@ -56,9 +56,10 @@ public class ReaderService : IReaderService
         if (reader is null)
             return false;
 
+       
         //verfies correct pw was given
-        var isValidPassword = await _userManager.CheckPasswordAsync(reader, model.Password);
-        if (isValidPassword == false)
+       var isValidPassword = await _userManager.CheckPasswordAsync(reader, model.Password);
+       if (isValidPassword == false)
             return false;
         //verifies the reader exists
         await _signInManager.SignInAsync(reader, true);//changed to .SignInAsync from .SignInManager

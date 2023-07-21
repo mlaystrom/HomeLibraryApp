@@ -7,9 +7,9 @@
     <div class=" col d-flex vstack gap-2 col-md-2 ">
 <a asp-action="Create" class="">Add A Book</a>
 </div>
-<table class = "table">
+<table class = "table table-hover ">
     <thead>
-        <tr>
+        <tr class="">
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -20,14 +20,14 @@
                 @Html.DisplayNameFor(model => model.SeriesNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GenreId)
+                @Html.DisplayNameFor(model => model.Genre)
             </th>
         </tr>
     </thead>
     <tbody>
           @foreach (var item in Model)
             {
-                <tr>
+                <tr class="">
                     <td>
                         @item.Title
                     </td>
@@ -38,9 +38,9 @@
                         @item.SeriesNumber
                     </td>
                     <td>
-                        @item.GenreId
+                        @item.Genre
                     </td>
-                    <td>
+                    <td class= "">
                         <a asp-action="Update" asp-route-id="@item.Id">Update</a> 
                         <span>|</span>
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

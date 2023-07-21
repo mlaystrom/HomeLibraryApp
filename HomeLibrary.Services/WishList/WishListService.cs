@@ -13,7 +13,7 @@ namespace HomeLibrary.Services.WishList;
 public class WishListService : IWishListService
 {
     //field that holds HomeLibraryDbContext and injected through a constructor
-    private HomeLibraryDbContext _context;
+    private readonly HomeLibraryDbContext _context;
     private int _readerId;
     public WishListService(UserManager<ReaderEntity> userManager, HomeLibraryDbContext context, SignInManager<ReaderEntity> signInManager)
     {
