@@ -6,4 +6,9 @@ public interface IBookService
 {
     Task<IEnumerable<BookListItem>> GetAllBooksAsync();
     Task<bool> CreateBookAsync(BookCreate model);
+
+    Task<BookDetail>GetBooksByIdAsync(int id);
+
+    Task<bool> UpdateBookAsync (BookUpdate model);
+    Task<bool>DeleteRestaurantByIdAsync(int id);
 }

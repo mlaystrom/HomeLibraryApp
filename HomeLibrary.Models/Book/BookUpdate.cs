@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HomeLibrary.Models.Book;
 
-public class BookCreate
+public class BookUpdate
 {
     public int Id { get; set; }
     public int ReaderId { get; set; }
@@ -15,8 +15,8 @@ public class BookCreate
     [Required]
     [MaxLength(100)]
     public string Author { get; set; } = string.Empty;
-    public int GenreId { get; set; } 
-   
+    public int GenreId { get; set; }
+
     public int SeriesNumber { get; set; }
     public DateTime DateFinished { get; set; }
 
