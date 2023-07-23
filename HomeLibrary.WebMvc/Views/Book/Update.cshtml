@@ -3,13 +3,15 @@
     ViewData["Title"] = "Update" + Model.Title;
 }
 
-<h1>Update @Model.Title</h1>
+<h1>Update Book: @Model.Title</h1>
 <hr>
+
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<form asp-action="Create" method="post">
+<form asp-action="Update" method="post">
     <input asp-for="Id" hidden disabled>
-    <input asp-for="GenreId" hidden disabled>
+   
+   
     <div class="col-md-6 form-floating mb-2">
         <input asp-for="Title" class="form-control" placeholder="Title">
         <span asp-validation-for="Title" class="text-danger"></span>
@@ -32,16 +34,18 @@
         
     </div> 
     </div>
-      <div class="col-auto ">
+      <div class="col d-flex col-md-2 ">
         <input asp-for="Comment" class="form-control" placeholder="Comment">
         <span asp-validation-for="Comment" class="text-danger"></span>
         <label asp-for="Comment" class= "visually-hidden"for="autoSizingSelect"></label> 
     </div>
-     <div class=" col d-flex vstack gap-2 col-md-2 ">
-        <input type="submit" value="Update" class="btn btn-outline-primary btn-lg">
-        <a asp-action="Index" class="">Book Library</a>
+
+    <div class=" col d-flex vstack gap-2 col-md-2 ">
+        <input type="Submit" value="Update" class="btn btn-outline-primary btn-lg">
+        <a asp-action="Index" class="">Back to Library</a>
      </div>
 </form>
+
 
 @section Scripts {
     @{

@@ -105,9 +105,7 @@ public class WishListService : IWishListService
         //returns a boolean that states 1 change made
         _context.WishList.Remove(entity);
 
-        var numberOfChanges = await _context.SaveChangesAsync();
-
-        return numberOfChanges == 1;
+        return await _context.SaveChangesAsync() == 1;
     }
 }
     

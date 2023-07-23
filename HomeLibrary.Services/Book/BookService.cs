@@ -87,7 +87,7 @@ public class BookService : IBookService
         //declaring variable entity
         //searching for an entity in the Book table of the Db
         //the entity being searched for is an entity with the primary key value matching model.Id
-        BooksEntity? entity = await _context.Book.FindAsync(model.Id); 
+        var entity = await _context.Book.FindAsync(model.Id); 
 
         if (entity is null)
         return false;
@@ -104,7 +104,7 @@ public class BookService : IBookService
 
     public async Task<bool> DeleteBooksByIdAsync(int id)
     {   // checking the Dbset for the book within BooksEntity that matches the given id parameter
-        BooksEntity? entity = await _context.Book.FindAsync(id);
+        var entity = await _context.Book.FindAsync(id);
         if(entity is null)
             return false;
             

@@ -15,8 +15,13 @@
 
 
 <form asp-action="Create" method="post">
-   
-    
+
+    <div>
+        <label asp-for="GenreId">Genre</label>
+        <select asp-for="GenreId" asp-items="genreList"></select>
+      
+    </div>
+
     <div class="col-md-6 form-floating mb-2">
         <input asp-for="Title" class="form-control" placeholder="Title">
         <span asp-validation-for="Title" class="text-danger"></span>
@@ -29,10 +34,7 @@
         <label asp-for="Author" class="form-label"></label>
        
     </div>
-    <div>
-        <label asp-for="GenreId">Genre</label>
-        <select asp-for="GenreId" asp-items="genreList"></select>
-    </div>
+   
       <div class="col-md-6 form-floating mb-2">
          <input asp-for="SeriesNumber" class="form-control" placeholder="SeriesNumber">
          <span asp-validation-for="SeriesNumber" class="text-danger"></span>
@@ -45,6 +47,7 @@
         <label asp-for="Comment" class="form-label"></label>
         
     </div>
+    
 
 
 

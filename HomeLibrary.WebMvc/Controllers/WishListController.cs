@@ -85,7 +85,7 @@ public class WishListController : Controller
     }
 
     [HttpPost]
-    [ActionName(nameof(ConfirmDelete))]//ActionName connects the method (ConfirmDelete) to the ConfirmDelete action
+    [ActionName(nameof(Delete))]//ActionName connects the method (ConfirmDelete) to the ConfirmDelete action
 
     public async Task<IActionResult> ConfirmDelete(int id)
     {
