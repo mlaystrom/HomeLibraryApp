@@ -9,4 +9,5 @@ public class BookDetail
     public int GenreId { get; set; }
     public int SeriesNumber { get; set; }
     public string Comment {get; set; } = string.Empty;
+    public DateTime DateFinished { get; set; }
 }

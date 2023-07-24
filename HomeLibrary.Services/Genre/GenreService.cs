@@ -75,6 +75,13 @@ public class GenreService : IGenreService
         var entity = await _context.Genre.FindAsync(id);
         if (entity is null)
             return false;
+        //using this to check if there are books that are using the genre that wanting to delete
+        var activeGenre = await _context.Book.Where(b =>b.GenreId ==id).ToListAsync();
+        // won't delete the genre if there are books using it
+        if(activeGenre.Any())
+        {
+            return false;
+        }
 
         _context.Genre.Remove(entity);
         return await _context.SaveChangesAsync() == 1;

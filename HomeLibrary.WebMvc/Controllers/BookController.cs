@@ -19,18 +19,23 @@ public class BookController : Controller
         _genreService = genreService;
     }
 
+    //Controller method that is called when the "index" page is requested by a reader(user)
     [HttpGet]
     public async Task<IActionResult> Index()
     {
+        //getting a list of books from the Db
         var book = await _service.GetAllBooksAsync();
         return View(book);
     }
 
     [HttpGet]
     public async Task <IActionResult> Create()
-    {
+    {   
+        //getting all genres from the _genreService
         var genres = await _genreService.GetAllGenresAsync();
+        //Converting the list of genres from _GenreService into a list of SelectList items, each will be an option in a dropdown list
         var selectList = genres.Select(g => new SelectListItem(g.Genre, g.Id.ToString())).ToList();
+        //this is a "Dictionary" that is used to pass data from this controller to the Create View
         ViewData["Genres"]= selectList;
         return View();
     }
@@ -78,7 +83,8 @@ public class BookController : Controller
             Author = book.Author,
             SeriesNumber = book.SeriesNumber,
             GenreId = book.GenreId,
-            Comment = book.Comment
+            Comment = book.Comment,
+            DateFinished = book.DateFinished
         };
         return View(model);
     }

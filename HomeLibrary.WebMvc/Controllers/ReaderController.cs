@@ -15,9 +15,13 @@ public ReaderController(IReaderService service)
     _service = service;
 }
 
+//attempting an index
+//GET Index
+
+
 //Returning detail view for a Reader
 [HttpGet]
-public async Task<IActionResult> Details(int id)
+public async Task<IActionResult> Index(int id)
 {
     ReaderDetail? model = await _service.GetReaderByIdAsync(id);
 
@@ -59,7 +63,7 @@ public async Task<IActionResult> Edit(int id, ReaderEdit model)
     //then pass the model to the new service method, if the service returns true and the update passes, return the reader to the Details VIEW
 
     if(await _service.UpdateReaderAsync(model))
-    return RedirectToAction(nameof(Details), new { id = id});
+    return RedirectToAction(nameof(Index), new { id = id});
 
     ModelState.AddModelError("Save Error", "Could not update your details.  Please try again.");
     return View(model);

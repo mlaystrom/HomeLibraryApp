@@ -82,10 +82,10 @@ public class ReaderService : IReaderService
       );
     }
 
-    public async Task<ReaderDetail?>GetReaderByIdAsync(int readerId)
+    public async Task<ReaderDetail?>GetReaderByIdAsync(int id)//changed from readerId to id
     {
         //retrieve the Reader with the given Id from database
-        var entity = await _context.Reader.FindAsync(readerId);
+        var entity = await _context.Reader.FindAsync(id);//changed from readerId to id
         if(entity is null)
         return null;
 
