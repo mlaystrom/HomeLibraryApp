@@ -1,13 +1,15 @@
 @model ReaderEdit
 @{
-    ViewData["Title"] = "Edit" + Model.FirstName;
+    ViewData["Title"] = "Update" + Model.UserName;
 }
 
-<h1>Update Information</h1>
+<h1>UPDATE FOR: @Model.UserName</h1>
 <hr>
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <form asp-action="Edit" class="row g-2">
-        <input asp-for="Id" hidden disabled>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+
+    <form asp-action="Update" class="row g-2 mt-5"  method="post">
+        <input asp-for="Id" hidden >
         <div class="col-md-6">
             <label asp-for="Email" class="form-label"></label>
                <input asp-for="Email" class="form-control">
@@ -17,11 +19,6 @@
             <label asp-for="UserName" class="form-label"></label>
                <input asp-for="UserName" class="form-control">
         <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
-         <div class="col-md-6">
-            <label asp-for="Password" class="form-label"></label>
-               <input asp-for="Password" class="form-control">
-        <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div class="col-md-6">
             <label asp-for="FirstName" class="form-label"></label>
@@ -35,7 +32,7 @@
         </div>
          <div class=" col d-flex vstack gap-2 col-md-2 ">
         <input type="submit" value="Update" class="btn btn-outline-primary btn-lg">
-        <a asp-action="Details" class="">Back to Details</a>
+        <a asp-action="Details" class="" asp-route-id="@Model.Id">Back to Details</a>
      </div>
        
         

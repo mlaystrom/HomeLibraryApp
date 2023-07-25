@@ -3,10 +3,10 @@
     ViewData["Title"] = Model.FirstName;
 }
 
-<h1>Delete @Model.FirstName</h1>
+<h1>Delete @Model.FirstName @Model.LastName</h1>
 <h2>Are you sure you want to delete your account?</h2>
 <hr>
-<form asp-action="Delete" method="post" class="col d-flex vstack gap-2 col-md-2">
-    <input type ="submit" value="Delete Account" class="btn btn-outline-danger btn-lg" />
-     <a asp-controller="Home" asp-action="Index">Back to Home Page</a>
+<form asp-action="Delete" class="col d-flex vstack gap-2 col-md-2">
+    <input type ="submit" value="Delete" class="btn btn-outline-danger btn-lg" />
+     <a asp-controller="Home" asp-action="Index">Return to main</a>
 </form>

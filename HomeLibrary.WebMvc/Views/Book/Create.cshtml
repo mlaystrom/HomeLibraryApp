@@ -10,15 +10,16 @@
     var genreList = ViewData["Genres"] as List<SelectListItem>;
 }
 
-<h1>Add A Book</h1>
+<h1>ADD A BOOK</h1>
+<hr>
 <div asp-validation-summary="All" class="text-danger"></div>
 
 
 <form asp-action="Create" method="post">
 
     <div>
-        <label asp-for="GenreId">Genre</label>
-        <select asp-for="GenreId" asp-items="genreList"></select>
+        <label asp-for="GenreId" class="mb-3 mt-5 p-2 pe-3 me-3" style="background: white;">Genre:</label>
+        <select asp-for="GenreId" asp-items="genreList" class="p-1"></select>
       
     </div>
 

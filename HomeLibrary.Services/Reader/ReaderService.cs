@@ -82,6 +82,21 @@ public class ReaderService : IReaderService
       );
     }
 
+    public async Task<IEnumerable<ReaderListItem>> GetAllReadersAsync()
+    {
+        List<ReaderListItem> readers = await _context.Reader
+        .Select(r => new ReaderListItem()
+        {
+            Id = r.Id,
+            Email = r.Email,
+            UserName = r.UserName,
+            FirstName = r.FirstName,
+            LastName = r.LastName
+        })
+        .ToListAsync();
+        return readers;
+    }
+
     public async Task<ReaderDetail?>GetReaderByIdAsync(int id)//changed from readerId to id
     {
         //retrieve the Reader with the given Id from database
@@ -102,10 +117,11 @@ public class ReaderService : IReaderService
 
     public async Task<bool> UpdateReaderAsync(ReaderEdit model)
     {
-        var entity = await _context.Reader.FindAsync (model.Id);
+        var entity = await _context.Reader.FindAsync(model.Id);
         if (entity is null)
         return false;
         //updating the entity's properties
+        entity.Id = model.Id;
         entity.UserName = model.UserName;
         entity.FirstName = model.FirstName;
         entity.LastName = model.LastName;

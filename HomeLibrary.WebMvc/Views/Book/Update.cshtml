@@ -3,7 +3,7 @@
     ViewData["Title"] = "Update" + Model.Title;
 }
 
-<h1>Update Book: @Model.Title</h1>
+<h1>UPDATE: @Model.Title</h1>
 <hr>
 
 <div asp-validation-summary="All" class="text-danger"></div>
@@ -13,7 +13,7 @@
      <input asp-for="GenreId" hidden>
    
    
-    <div class="col-md-6 form-floating mb-2">
+    <div class="col-md-6 form-floating mb-2 mt-5">
         <input asp-for="Title" class="form-control" placeholder="Title">
         <span asp-validation-for="Title" class="text-danger"></span>
         <label asp-for="Title" class="form-label"></label>

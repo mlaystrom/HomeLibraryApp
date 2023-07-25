@@ -4,14 +4,14 @@
     ViewData["Title"] = Model.Genre;
 }
 
-<h1>Delete @Model.Genre from your Genre List</h1>
+<h1>DELETE: @Model.Genre </h1>
 <hr>
 
 <dl>
-    <dt class="col-sm-2">
+    <dt class="col-sm-2 mt-5" style="">
         @Html.DisplayNameFor(model => model.Genre)
     </dt>
-    <dd class="col-sm-10">
+    <dd class="col-sm-2 mt-2 ps-2" style="background: white;">
         @Html.DisplayFor(model => model.Genre)
     </dd>
 </dl>

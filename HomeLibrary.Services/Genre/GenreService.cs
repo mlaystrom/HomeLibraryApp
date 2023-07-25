@@ -17,10 +17,11 @@ public class GenreService : IGenreService
         _context = context;
     }
 
-    public async Task<List<GenreListItem>> GetAllGenresAsync()
+    public async Task<List<GenreListItem>> GetAllGenresAsync()//to filter genre by reader (int readerId)
     {
         //query Db
         var genre = await _context.Genre
+        //possibly where I add a .Where(b => b.ReaderId == readerId)
         .Select(b => new GenreListItem
         {
             Id = b.Id,

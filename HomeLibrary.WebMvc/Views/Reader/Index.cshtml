@@ -1,41 +1,56 @@
-@model ReaderListItem
-@{
-    ViewData["Title"] = Model.FirstName;
-}
+@model IEnumerable<ReaderListItem>
+    @{
+        ViewData["Title"] = "Reader Index";
+    }
 
-<h1> Hi, @Model.FirstName </h1>
-<h2> Your account details: </h2>
-<hr>
-<dl class="row">
-    <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.Email)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayNameFor(model => model.Email)
-    </dd>
-      <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.UserName)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayNameFor(model => model.UserName)
-    </dd>
-      <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.FirstName)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayNameFor(model => model.FirstName)
-    </dd>
-      <dt class="col-sm-2">
-        @Html.DisplayNameFor(model => model.LastName)
-    </dt>
-    <dd class="col-sm-10">
-        @Html.DisplayNameFor(model => model.LastName)
-    </dd>
-</dl>
+    <h1>READER LIST</h1>
+    <hr>
+    <div class=" col d-flex vstack gap-2 col-md-2 ">
 
-<div>
-     <a asp-controller="Home" asp-action="Index">Back to Home Page</a>
-    <span>|</span>
-    <a asp-action="Update" asp-route-itemid="@Model.Id">Edit</a>
-    <a asp-action="Delete" asp-route-item-itemid="@Model.Id">Delete</a>
 </div>
+
+<table class = "table table-hover mt-5 ">
+    <thead>
+        <tr class="">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+          @foreach (var item in Model)
+            {
+                <tr class="">
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.FirstName
+                    </td>
+                    <td>
+                        @item.LastName
+                    </td>
+                    <td class= "text-end">
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <span>|</span>
+                        <a asp-action="Update" asp-route-id="@item.Id">Update</a> 
+                        <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+    </tbody>
+</table>

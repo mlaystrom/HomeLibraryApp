@@ -17,11 +17,17 @@ public ReaderController(IReaderService service)
 
 //attempting an index
 //GET Index
+[HttpGet]
+public async Task<IActionResult> Index()
+{
+    var readers = await _service.GetAllReadersAsync();
+    return View(readers);
+}
 
 
 //Returning detail view for a Reader
 [HttpGet]
-public async Task<IActionResult> Index(int id)
+public async Task<IActionResult> Details(int id)
 {
     ReaderDetail? model = await _service.GetReaderByIdAsync(id);
 
@@ -35,7 +41,7 @@ public async Task<IActionResult> Index(int id)
 // GET Method
 
 [HttpGet]
-public async Task<IActionResult> Edit(int id)
+public async Task<IActionResult> Update(int id)
 {
     ReaderDetail? reader = await _service.GetReaderByIdAsync(id);
     if (reader is null)
@@ -55,7 +61,7 @@ public async Task<IActionResult> Edit(int id)
 }
 
 [HttpPost]
-public async Task<IActionResult> Edit(int id, ReaderEdit model)
+public async Task<IActionResult> Update(int id, ReaderEdit model)
 {
     if (!ModelState.IsValid)
     return View(model);
@@ -63,15 +69,15 @@ public async Task<IActionResult> Edit(int id, ReaderEdit model)
     //then pass the model to the new service method, if the service returns true and the update passes, return the reader to the Details VIEW
 
     if(await _service.UpdateReaderAsync(model))
-    return RedirectToAction(nameof(Index), new { id = id});
+    return RedirectToAction(nameof(Details), new { id = id});
 
-    ModelState.AddModelError("Save Error", "Could not update your details.  Please try again.");
+    ModelState.AddModelError("Save Error", "Could not update the details.  Please try again.");
     return View(model);
 }
 
 [HttpGet]//forgot to add this method endpoint for Delete
 
-public async Task<IActionResult>Delete(int id)
+public async Task<IActionResult> Delete(int id)
 {
     ReaderDetail? reader = await _service.GetReaderByIdAsync(id);
     if (reader is null)
@@ -81,7 +87,7 @@ public async Task<IActionResult>Delete(int id)
 }
 
 [HttpPost]
-[ActionName(nameof(ConfirmDelete))]//ActionName connects the method (ConfirmDelete) to the ConfirmDelete action
+[ActionName(nameof(Delete))]//ActionName connects the method (ConfirmDelete) to the ConfirmDelete action
 
 public async Task<IActionResult> ConfirmDelete(int id)
 {

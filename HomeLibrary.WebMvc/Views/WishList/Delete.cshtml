@@ -2,10 +2,10 @@
 @{
     ViewData["Title"] = Model.Title;
 }
+<h1>DELETE: @Model.Title</h1>
+<hr>
 
-<h1>Delete @Model.Title from WishList</h1>
-
-<dl class="row">
+<dl class="row mt-5">
     <dt class="col-sm-2">
         @Html.DisplayNameFor(model => model.Title)
     </dt>
@@ -37,3 +37,4 @@
     <input type ="submit" value="Delete" class="btn btn-outline-danger btn-lg" />
      <a asp-action="Index">Back to WishList</a>
 </form>
+
