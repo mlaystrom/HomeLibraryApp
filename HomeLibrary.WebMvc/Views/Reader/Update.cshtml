@@ -9,10 +9,10 @@
 
 
     <form asp-action="Update" class="row g-2 mt-5"  method="post">
-        <input asp-for="Id" hidden >
+        <input asp-for="Id" hidden>
         <div class="col-md-6">
             <label asp-for="Email" class="form-label"></label>
-               <input asp-for="Email" class="form-control">
+             <input asp-for="Email" class="form-control">
         <span asp-validation-for="Email" class="text-danger"></span>
         </div>
          <div class="col-md-6">
@@ -30,9 +30,11 @@
                <input asp-for="LastName" class="form-control">
         <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
-         <div class=" col d-flex vstack gap-2 col-md-2 ">
+         <div class="col d-flex  mt-5 mb-2">
         <input type="submit" value="Update" class="btn btn-outline-primary btn-lg">
-        <a asp-action="Details" class="" asp-route-id="@Model.Id">Back to Details</a>
+     </div>
+     <div>
+         <a asp-action="Details" class=" p-2" asp-route-id="@Model.Id">Back to Details</a>
      </div>
        
         

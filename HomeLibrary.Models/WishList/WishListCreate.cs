@@ -17,6 +17,7 @@ public class WishListCreate
     [MaxLength(100)]
     public string Author { get; set; } = string.Empty;
 
+    [Display(Name = "Series Number")]
     public int SeriesNumber { get; set; }
 
     public string Genre { get; set; } = string.Empty;

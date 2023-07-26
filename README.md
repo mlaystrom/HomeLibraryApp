@@ -17,5 +17,7 @@ This was created as my capstone project while a student with [Eleven Fifty Acade
 - Each user has a WishList that they can enter books that they'd like to read 
 - These WishList books can be updated and deleted
 
+## Diagram
+![HomeLibrary ERD](./Assets/HomeLibraryERD.png)
 
 

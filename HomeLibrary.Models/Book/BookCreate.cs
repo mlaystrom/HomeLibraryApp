@@ -15,8 +15,9 @@ public class BookCreate
     [Required]
     [MaxLength(100)]
     public string Author { get; set; } = string.Empty;
-    public int GenreId { get; set; } 
-   
+    public int GenreId { get; set; }
+
+    [Display(Name = "Series Number")]
     public int SeriesNumber { get; set; }
     public DateTime DateFinished { get; set; }
 

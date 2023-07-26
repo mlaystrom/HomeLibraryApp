@@ -3,9 +3,9 @@
         ViewData["Title"] = "Book Index";
     }
 
-    <h1>YOUR BOOK LIST</h1>
+    <h1>LIBRARY</h1>
     <hr>
-    <div class=" col d-flex vstack gap-2 col-md-2 ">
+    <div class=" col d-flex p-3">
 <a asp-action="Create" class="mb-3 mt-5">Add A Book</a>
 </div>
 <table class = "table table-hover ">
@@ -42,6 +42,8 @@
                         @item.Genre
                     </td>
                     <td class= "text-end">
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                        <span>|</span>
                         <a asp-action="Update" asp-route-id="@item.Id">Update</a> 
                         <span>|</span>
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

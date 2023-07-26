@@ -17,7 +17,10 @@ public class BookUpdate
     public string Author { get; set; } = string.Empty;
     public int GenreId { get; set; }
 
+    [Display(Name = "Series Number")]
     public int SeriesNumber { get; set; }
+
+    [Display(Name ="Date Finished")]
     public DateTime DateFinished { get; set; }
 
     [MaxLength(250)]

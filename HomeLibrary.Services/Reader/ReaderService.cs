@@ -41,7 +41,7 @@ public class ReaderService : IReaderService
         };
 
         //var passwordHasher = new PasswordHasher<ReaderEntity>();
-        //entity.Password = passwordHasher.HashPassword(entity, model.Password);
+       // reader.Password = passwordHasher.HashPassword(reader, model.Password);
 
         var createResult = await _userManager.CreateAsync(reader, model.Password);
         foreach (var e in createResult.Errors)

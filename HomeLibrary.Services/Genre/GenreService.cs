@@ -1,6 +1,7 @@
 using HomeLibrary.Data;
 using HomeLibrary.Data.Entities;
 using HomeLibrary.Models.Genre;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeLibrary.Services.Genre;
@@ -9,19 +10,25 @@ public class GenreService : IGenreService
 {
     //field being injected through constructor
     private readonly HomeLibraryDbContext _context;
+    private int _readerId;
 
     //using this to set up Genre service methods
     //the methods communicate with the Db and return formatted C# objects that the controller will use
-    public GenreService(HomeLibraryDbContext context)
+    public GenreService(UserManager<ReaderEntity> userManager, SignInManager<ReaderEntity> signInManager, HomeLibraryDbContext context)
     {
+        var user = signInManager.Context.User; //looking at who is signed in within the current context
+
+        var claim = userManager.GetUserId(user); //looking at current user and getting the Id claim
+        int.TryParse(claim, out _readerId); //taking that claim and converting from a string to an integer and saving to the field _readerId
         _context = context;
+        
     }
 
-    public async Task<List<GenreListItem>> GetAllGenresAsync()//to filter genre by reader (int readerId)
+    public async Task<List<GenreListItem>> GetAllGenresAsync()//to filter genre by reader, have the field _readerId , this represents the current user
     {
         //query Db
         var genre = await _context.Genre
-        //possibly where I add a .Where(b => b.ReaderId == readerId)
+        .Where(b => b.ReaderId == _readerId) // looks for genres by the current user
         .Select(b => new GenreListItem
         {
             Id = b.Id,
@@ -37,7 +44,8 @@ public class GenreService : IGenreService
 
     var entity = new GenreEntity
     {
-        Genre = model.Genre
+        Genre = model.Genre,
+        ReaderId = _readerId
     };
         _context.Genre.Add(entity);
         var numberOfChanges = await _context.SaveChangesAsync();
