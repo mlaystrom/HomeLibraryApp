@@ -45,6 +45,10 @@ public class BookService : IBookService
 
     public async Task<IEnumerable<BookListItem>> GetAllBooksAsync()
     {
+        // getting all books from BooksEntity Db set
+        //Including books that are associated with Reader and Genre
+        //.Where saying to only include those that belong to _readerId
+        //.Select makes a new BookListItem collection
         var book = await _context.Book.Include(b => b.Reader).Include(b => b.Genre)
         .Where(b => b.ReaderId == _readerId)
         .Select(b => new BookListItem()
@@ -77,11 +81,8 @@ public class BookService : IBookService
             GenreId = entity.GenreId,
             Comment = entity.Comment,
             DateFinished = entity.DateFinished
-
-
         };
         return model;
-
     }
 
     public async Task<bool> UpdateBookAsync(BookUpdate model)
@@ -117,6 +118,4 @@ public class BookService : IBookService
         return await _context.SaveChangesAsync() == 1;
 
     }
-
-
 }

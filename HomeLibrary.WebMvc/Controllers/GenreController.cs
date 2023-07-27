@@ -14,10 +14,10 @@ public class GenreController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index ()
+    public async Task<IActionResult> Index()
     {
-         List<GenreListItem> genres = await _service.GetAllGenresAsync();
-         return View(genres);
+        List<GenreListItem> genres = await _service.GetAllGenresAsync();
+        return View(genres);
     }
 
     // Returning the Create View
@@ -29,18 +29,17 @@ public class GenreController : Controller
 
     // POST Create
     // taking in the form data from the Create View (Genre)
-
     [HttpPost]
-        public async Task<IActionResult> Create(GenreCreate model)
-        {
+    public async Task<IActionResult> Create(GenreCreate model)
+    {
         if (!ModelState.IsValid)
-        return View(model);
+            return View(model);
 
         //calling service method to create a glorious new Genre
         await _service.CreateGenreAsync(model);
 
         return RedirectToAction(nameof(Index));
-        }
+    }
 
     // GET Update method
     [HttpGet]
@@ -57,6 +56,7 @@ public class GenreController : Controller
         return View(model);
     }
 
+
     [HttpPost]
     public async Task<IActionResult> Update(int id, GenreUpdate model)
     {
@@ -70,9 +70,7 @@ public class GenreController : Controller
         return View(model);
     }
 
-
     // GET Delete method
-
     [HttpGet]
 
     public async Task<IActionResult> Delete(int id)
@@ -86,6 +84,7 @@ public class GenreController : Controller
 
     //POST Delete
     [HttpPost]
+
     [ActionName(nameof(Delete))] //connecting the method Confirm Delete with the Delete Action
     public async Task<IActionResult> ConfirmDelete(int id)
     {
@@ -93,8 +92,4 @@ public class GenreController : Controller
         return RedirectToAction(nameof(Index));
 
     }
-
-
-
-
 }

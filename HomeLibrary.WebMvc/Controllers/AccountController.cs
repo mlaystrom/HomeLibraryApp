@@ -7,7 +7,7 @@ namespace HomeLibrary.WebMvc.Controllers;
 public class AccountController : Controller
 {
     private readonly IReaderService _readerService;
-    public AccountController (IReaderService readerService)
+    public AccountController(IReaderService readerService)
     {
         _readerService = readerService;
     }
@@ -35,7 +35,7 @@ public class AccountController : Controller
             return View(model);
         }
 
-        //Login the new reader(user), redirect to home after
+        //Login the new reader(user), redirect to Book Index View after
         ReaderLogin loginModel = new()
         {
             UserName = model.UserName,
@@ -43,17 +43,14 @@ public class AccountController : Controller
         };
         await _readerService.LoginAsync(loginModel);
         return RedirectToAction("Index", "Home");
-
     }
 
     // GET login 
-
     public IActionResult Login()
     {
         return View();
     }
 
-    
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(ReaderLogin model)
     {
@@ -62,7 +59,7 @@ public class AccountController : Controller
         {
             return View(model);
         }
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Book");
     }
 
     public async Task<IActionResult> Logout()
@@ -70,5 +67,4 @@ public class AccountController : Controller
         await _readerService.LogoutAsync();
         return RedirectToAction("Index", "Home");
     }
-    
 }

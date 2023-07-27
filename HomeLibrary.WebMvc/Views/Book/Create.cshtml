@@ -13,52 +13,37 @@
 <h1>ADD A BOOK</h1>
 <hr>
 <div asp-validation-summary="All" class="text-danger"></div>
-
-
 <form asp-action="Create" method="post">
-
     <div>
         <label asp-for="GenreId" class="mb-3 mt-5 p-2 pe-3 me-3" style="background: white;">Genre:</label>
         <select asp-for="GenreId" asp-items="genreList" class="p-1"></select>
-      
     </div>
-
     <div class="col-md-6 form-floating mb-2">
         <input asp-for="Title" class="form-control" placeholder="Title">
         <span asp-validation-for="Title" class="text-danger"></span>
         <label asp-for="Title" class="form-label"></label>
-      
     </div>
-      <div class="col-md-6 form-floating mb-2">
+    <div class="col-md-6 form-floating mb-2">
          <input asp-for="Author" class="form-control" placeholder="Author">
          <span asp-validation-for="Author" class="text-danger"></span>
         <label asp-for="Author" class="form-label"></label>
-       
     </div>
-   
-      <div class="col-md-6 form-floating mb-2">
+    <div class="col-md-6 form-floating mb-2">
          <input asp-for="SeriesNumber" class="form-control" placeholder="SeriesNumber">
          <span asp-validation-for="SeriesNumber" class="text-danger"></span>
-        <label asp-for="SeriesNumber" class="form-label"></label>
-       
+         <label asp-for="SeriesNumber" class="form-label"></label>
     </div>
-      <div class="col-md-6 form-floating mb-2">
+    <div class="col-md-6 form-floating mb-2">
         <input asp-for="Comment" class="form-control" placeholder="Comment">
         <span asp-validation-for="Comment" class="text-danger"></span>
         <label asp-for="Comment" class="form-label"></label>
-        
     </div>
-    
-
-
-
-     <div class=" col d-flex vstack gap-2 col-md-2 ">
+    <div class=" col d-flex vstack gap-2 col-md-2 ">
         <input type="submit" value="Create" class="btn btn-outline-primary btn-lg">
-        
-     </div>
-     <div class="col d-flex vstack gap-2 col-md-2 p-3">
+    </div>
+    <div class="col d-flex vstack gap-2 col-md-2 p-3">
         <a asp-action="Index" style="text-align:center">Back to Library</a>
-     </div>
+    </div>
 </form>
 
 @section Scripts {

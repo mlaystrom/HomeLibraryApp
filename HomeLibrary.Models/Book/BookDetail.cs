@@ -13,6 +13,7 @@ public class BookDetail
     [Display(Name = "Series Number")]
     public int SeriesNumber { get; set; }
     public string Comment {get; set; } = string.Empty;
+    
     [Display(Name = "Date Finished")]
     public DateTime DateFinished { get; set; }
 }

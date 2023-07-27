@@ -7,7 +7,6 @@ namespace HomeLibrary.Models.WishList;
 public class WishListCreate
 {
    
-   
     [Required]
     [MinLength(2, ErrorMessage = "{0} must be at least {1} characters long.")]
     [MaxLength(100, ErrorMessage = "{0} must be no more than {1} characters.")]

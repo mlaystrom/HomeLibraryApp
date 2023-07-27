@@ -6,17 +6,14 @@
 <h1>UPDATE GENRE TYPE: @Model.Genre</h1>
 <hr>
 
-
 <form asp-action="Update" method="post">
     <input asp-for="Id" hidden disabled>
-   
    
     <div class="col-md-6 form-floating mb-2 mt-5">
         <input asp-for="Genre" class="form-control" placeholder="Genre">
         <span asp-validation-for="Genre" class="text-danger"></span>
         <label asp-for="Genre" class="form-label"></label>
     </div>
-
      <div class=" col d-flex vstack gap-2 col-md-2 ">
         <input type="Submit" value="Update" class="btn btn-outline-primary btn-lg">
         <a asp-action="Index" style="text-align:center">Back to Genre List</a>

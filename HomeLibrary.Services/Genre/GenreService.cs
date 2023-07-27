@@ -10,6 +10,8 @@ public class GenreService : IGenreService
 {
     //field being injected through constructor
     private readonly HomeLibraryDbContext _context;
+
+    //this field will make it where we can gather genres by current user(reader)
     private int _readerId;
 
     //using this to set up Genre service methods
@@ -21,7 +23,7 @@ public class GenreService : IGenreService
         var claim = userManager.GetUserId(user); //looking at current user and getting the Id claim
         int.TryParse(claim, out _readerId); //taking that claim and converting from a string to an integer and saving to the field _readerId
         _context = context;
-        
+
     }
 
     public async Task<List<GenreListItem>> GetAllGenresAsync()//to filter genre by reader, have the field _readerId , this represents the current user
@@ -35,18 +37,17 @@ public class GenreService : IGenreService
             Genre = b.Genre
         })
       .ToListAsync();//converting selection into a C# list
-      //returning the list of GenreList Item objects, which represent all the genres from the Db with properties Id and Genre
+                     //returning the list of GenreList Item objects, which represent all the genres from the Db with properties Id and Genre
         return genre;
     }
 
     public async Task<bool> CreateGenreAsync(GenreCreate model)
     {
-
-    var entity = new GenreEntity
-    {
-        Genre = model.Genre,
-        ReaderId = _readerId
-    };
+        var entity = new GenreEntity
+        {
+            Genre = model.Genre,
+            ReaderId = _readerId
+        };
         _context.Genre.Add(entity);
         var numberOfChanges = await _context.SaveChangesAsync();
 
@@ -59,7 +60,7 @@ public class GenreService : IGenreService
 
         if (entity is null)
             return new GenreDetail();
-            GenreDetail model = new()
+        GenreDetail model = new()
         {
             Id = entity.Id,
             Genre = entity.Genre
@@ -72,7 +73,7 @@ public class GenreService : IGenreService
         var entity = await _context.Genre.FindAsync(model.Id);
 
         if (entity is null)
-        return false;
+            return false;
 
         entity.Genre = model.Genre;
 
@@ -85,16 +86,13 @@ public class GenreService : IGenreService
         if (entity is null)
             return false;
         //using this to check if there are books that are using the genre that wanting to delete
-        var activeGenre = await _context.Book.Where(b =>b.GenreId ==id).ToListAsync();
+        var activeGenre = await _context.Book.Where(b => b.GenreId == id).ToListAsync();
         // won't delete the genre if there are books using it
-        if(activeGenre.Any())
+        if (activeGenre.Any())
         {
             return false;
         }
-
         _context.Genre.Remove(entity);
         return await _context.SaveChangesAsync() == 1;
     }
-
-    
 }

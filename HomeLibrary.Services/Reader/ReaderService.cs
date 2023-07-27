@@ -31,7 +31,6 @@ public class ReaderService : IReaderService
         if (await ReaderExistsAsync(model.Email, model.UserName))
             return false;
 
-
         ReaderEntity reader = new()
         {
             FirstName = model.FirstName,
@@ -40,14 +39,12 @@ public class ReaderService : IReaderService
             Email = model.Email
         };
 
-        //var passwordHasher = new PasswordHasher<ReaderEntity>();
-       // reader.Password = passwordHasher.HashPassword(reader, model.Password);
+        //don't need to add a password hasher because identity handles it
 
         var createResult = await _userManager.CreateAsync(reader, model.Password);
         foreach (var e in createResult.Errors)
         Console.WriteLine(e.Description);
         return createResult.Succeeded;
-
     }
     public async Task<bool> LoginAsync(ReaderLogin model)
     {
@@ -56,7 +53,6 @@ public class ReaderService : IReaderService
         if (reader is null)
             return false;
 
-       
         //verfies correct pw was given
        var isValidPassword = await _userManager.CheckPasswordAsync(reader, model.Password);
        if (isValidPassword == false)
@@ -127,7 +123,6 @@ public class ReaderService : IReaderService
         entity.LastName = model.LastName;
         entity.Email = model.Email;
 
-        
         var numberOfChanges = await _context.SaveChangesAsync();
 
         return numberOfChanges == 1;

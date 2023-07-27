@@ -19,8 +19,9 @@ public class WishListService : IWishListService
     {
         var user = signInManager.Context.User; //looking at who is signed in within the current context
 
-       var claim = userManager.GetUserId(user); //looking at current user and getting the Id claim
-       int.TryParse(claim,out _readerId); //taking that claim and converting from a string to an integer and saving to the field _readerId
+        var claim = userManager.GetUserId(user); //looking at current user and getting the Id claim
+
+        int.TryParse(claim, out _readerId); //taking that claim and converting from a string to an integer and saving to the field _readerId
         _context = context;
     }
 
@@ -61,23 +62,21 @@ public class WishListService : IWishListService
         return wishlist;
     }
 
-    public async Task<WishListDetail>GetWishListByIdAsync(int id)
+    public async Task<WishListDetail> GetWishListByIdAsync(int id)
     {
         var entity = await _context.WishList.FindAsync(id);
 
         if (entity is null)
             return new WishListDetail();
         WishListDetail model = new()
-            {
-                Id = entity.Id,
-                Title = entity.Title,
-                Author = entity.Author,
-                SeriesNumber = entity.SeriesNumber,
-                Genre = entity.Genre
-            };
-            return model;
-        
-        
+        {
+            Id = entity.Id,
+            Title = entity.Title,
+            Author = entity.Author,
+            SeriesNumber = entity.SeriesNumber,
+            Genre = entity.Genre
+        };
+        return model;
     }
 
     public async Task<bool> UpdateWishListAsync(WishListUpdate model)
@@ -86,13 +85,13 @@ public class WishListService : IWishListService
 
         if (entity is null)
             return false;
-            entity.Id = model.Id;
-            entity.Title = model.Title;
-            entity.Author = model.Author;
-            entity.SeriesNumber = model.SeriesNumber;
-            entity.Genre = model.Genre;
+        entity.Id = model.Id;
+        entity.Title = model.Title;
+        entity.Author = model.Author;
+        entity.SeriesNumber = model.SeriesNumber;
+        entity.Genre = model.Genre;
 
-            return await _context.SaveChangesAsync() == 1;
+        return await _context.SaveChangesAsync() == 1;
     }
 
     public async Task<bool> DeleteWishListByIdAsync(int id)
@@ -108,6 +107,6 @@ public class WishListService : IWishListService
         return await _context.SaveChangesAsync() == 1;
     }
 }
-    
+
 
 

@@ -10,9 +10,7 @@
 
 <form asp-action="Update" method="post">
     <input asp-for="Id" hidden>
-     <input asp-for="GenreId" hidden>
-   
-   
+    <input asp-for="GenreId" hidden>
     <div class="col-md-6 form-floating mb-2 mt-5">
         <input asp-for="Title" class="form-control" placeholder="Title">
         <span asp-validation-for="Title" class="text-danger"></span>
@@ -32,16 +30,13 @@
         <input asp-for="DateFinished" class="form-control" placeholder="DateFinished">
         <span asp-validation-for="DateFinished" class="text-danger"></span>
         <label asp-for="DateFinished" class="form-label"></label>
-        
     </div> 
-    
-      <div class="col-md-6 form-floating mb-3">
+    <div class="col-md-6 form-floating mb-3">
         <input asp-for="Comment" class="form-control" placeholder="Comment">
         <span asp-validation-for="Comment" class="text-danger"></span>
         <label asp-for="Comment" class= "form-label"></label> 
     </div>
-
-    <div class=" col d-flex vstack gap-2 col-md-2 ">
+    <div class="col d-flex vstack gap-2 col-md-2">
         <input type="Submit" value="Update" class="btn btn-outline-primary btn-lg">
         <a asp-action="Index" style="text-align:center">Back to Library</a>
      </div>
